@@ -12,11 +12,20 @@ pipeline {
         stage('Deploy Website') {
             steps {
                 sh '''
-                rm -rf /var/www/html/*
-                cp -r * /var/www/html/
+                    sudo rm -rf /var/www/html/*
+                    sudo cp -r * /var/www/html/
                 '''
             }
         }
+    }
 
+    post {
+        success {
+            echo 'Website deployed successfully!'
+        }
+
+        failure {
+            echo 'Website deployment failed.'
+        }
     }
 }
